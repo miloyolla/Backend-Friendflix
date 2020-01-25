@@ -30,3 +30,10 @@ Route::get('mostrarSerie/{id}', 'SerieController@showSerie');
 Route::post('criarSerie', 'SerieController@createSerie');
 Route::put('atualizarSerie/{id}', 'SerieController@updateSerie');
 Route::delete('deletarSerie/{id}', 'SerieController@deleteSerie');
+
+//Rotas usadas para Comentario
+Route::get('listarComentarios', 'CommentController@listComment');
+Route::get('mostrarComentario/{id}', 'CommentController@showComment');
+Route::post('criarComentario', 'CommentController@createComment');
+Route::put('atualizarComentario/{id}', 'CommentController@updateComment');
+Route::delete('deletarComentario/{id}', 'CommentController@deleteComment');
