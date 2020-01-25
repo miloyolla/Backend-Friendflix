@@ -16,9 +16,9 @@ class CreateSeriesTable extends Migration
       //criando serie com seus atributos
         Schema::create('series', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->String('nome');
-            $table->String('genero')->nullable();
-            $table->longText('sinopse');
+            $table->String('name');
+            $table->String('genre')->nullable();
+            $table->longText('synopsis');
             $table->integer('likes')->unsigned();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();

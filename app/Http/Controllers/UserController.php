@@ -14,6 +14,8 @@ class UserController extends Controller
       $user->name = $request->name;
       $user->email = $request->email;
       $user->password = $request->password;
+      $user->date_birth = $request->date_birth;
+      $user->user_name = $request->user_name;
       $user->save();
 
       return response()->json([$user]);
@@ -39,14 +41,20 @@ class UserController extends Controller
         if($request->name){
           $user->name = $request->name;
         }
-        else if($request->email){
+        if($request->email){
           $user->email = $request->email;
         }
-        else if($request->password){
+        if($request->password){
             $user->password = $request->password;
         }
+        if($request->date_birth){
+          $user->date_birth = $request->date_birth;
+        }
+        if($request->user_name){
+          $user->user_name = $request->user_name;
+        }
         else{
-          return response()->json(['insira o parâmetro a ser atualizado']);
+          return response()->json(['Insira o parâmetro a ser atualizado']);
         }
         $user->save();
         return response()->json([$user]);
@@ -58,7 +66,7 @@ class UserController extends Controller
 
     //Método usado para deletar um usuario
     public function deleteUser($id){
-      User::destroy($id); //produra e deleta
+      User::destroy($id);
       return response()->json(['Usuario deletado']);
     }
 }
