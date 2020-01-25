@@ -64,7 +64,7 @@ class UserController extends Controller
         return response()->json([$user]);
       }
       else{
-          return response()->json(['Esta serie nao existe']);
+          return response()->json(['Este usuario nao existe']);
         }
 
     }

@@ -13,7 +13,7 @@ class CreateSeriesTable extends Migration
      */
     public function up()
     {
-      //criando serie com seus atributos
+      //Criar serie com seus atributos
         Schema::create('series', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('name');
@@ -21,8 +21,8 @@ class CreateSeriesTable extends Migration
             $table->longText('synopsis');
             $table->integer('likes')->unsigned();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->integer('number_of_seasons');
-            $table->float('rating');
+            $table->integer('seasons');
+            $table->float('rating')->nullable();
             $table->timestamps();
             });
 

@@ -7,6 +7,7 @@ use App\Serie;
 
 class SerieController extends Controller
 {
+  //Método responsavel por criar uma nova série
   public function createSerie(Request $request){
     $serie = new Serie;
 
@@ -15,8 +16,8 @@ class SerieController extends Controller
     $serie->synopsis = $request->synopsis;
     $serie->likes = $request->likes;
     $serie->user_id = $request->user_id;
-    $serie->number_of_seasons = $request->number_of_seasons;
-    $table->rating = $request->rating;
+    $serie->seasons = $request->seasons;
+    $serie->rating = $request->rating;
     $serie->save();
 
     return response()->json([$serie]);
@@ -54,14 +55,11 @@ class SerieController extends Controller
       if($request->user_id){
         $serie->user_id = $request->user_id;
       }
-      if($request->number_of_seasons){
-        $serie->number_of_seasons = $request->number_of_seasons;
+      if($request->seasons){
+        $serie->seasons = $request->seasons;
       }
       if($request->rating){
         $serie->rating = $request->rating;
-      }
-      else{
-        return response()->json(['Insira o parâmetro a ser atualizado']);
       }
       $serie->save();
       return response()->json([$serie]);
@@ -74,6 +72,6 @@ class SerieController extends Controller
   //Método usado para deletar uma serie
   public function deleteSerie($id){
     Serie::destroy($id);
-    return response()->json(['Série deletado']);
+    return response()->json(['Série deletada']);
   }
 }

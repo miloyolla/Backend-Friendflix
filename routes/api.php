@@ -17,8 +17,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('listarUsers', 'UserController@listUser'); //nome que quero dar - nome da controller@nome do método
+//Rotas usadas para User
+Route::get('listarUsers', 'UserController@listUser');
 Route::get('mostrarUser/{id}', 'UserController@showUser');
 Route::post('criarUser', 'UserController@createUser');
 Route::put('atualizarUser/{id}', 'UserController@updateUser');
 Route::delete('deletarUser/{id}', 'UserController@deleteUser');
+
+//Rotas usadas para Serie
+Route::get('listarSeries', 'SerieController@listSerie');
+Route::get('mostrarSerie/{id}', 'SerieController@showSerie');
+Route::post('criarSerie', 'SerieController@createSerie');
+Route::put('atualizarSerie/{id}', 'SerieController@updateSerie');
+Route::delete('deletarSerie/{id}', 'SerieController@deleteSerie');
