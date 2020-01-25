@@ -16,6 +16,8 @@ class UserController extends Controller
       $user->password = $request->password;
       $user->date_birth = $request->date_birth;
       $user->user_name = $request->user_name;
+      $user->followers = $request->followers;
+      $user->following = $request->following;
       $user->save();
 
       return response()->json([$user]);
@@ -35,8 +37,7 @@ class UserController extends Controller
 
     //Método para edição de dados do usuario
     public function updateUser(Request $request, $id){
-      $user = User::find($id); //usa find para cair no ultimo else caso não exista
-
+      $user = User::find($id);
       if($user){
         if($request->name){
           $user->name = $request->name;
@@ -45,7 +46,7 @@ class UserController extends Controller
           $user->email = $request->email;
         }
         if($request->password){
-            $user->password = $request->password;
+          $user->password = $request->password;
         }
         if($request->date_birth){
           $user->date_birth = $request->date_birth;
@@ -53,15 +54,19 @@ class UserController extends Controller
         if($request->user_name){
           $user->user_name = $request->user_name;
         }
-        else{
-          return response()->json(['Insira o parâmetro a ser atualizado']);
+        if($request->followers){
+          $user->followers = $request->followers;
+        }
+        if($request->following){
+          $user->following = $request->following;
         }
         $user->save();
         return response()->json([$user]);
       }
       else{
-        return response()->json(['Este usuario não existe']);
-      }
+          return response()->json(['Esta serie nao existe']);
+        }
+
     }
 
     //Método usado para deletar um usuario

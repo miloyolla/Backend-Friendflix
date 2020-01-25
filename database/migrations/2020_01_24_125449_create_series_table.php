@@ -21,6 +21,8 @@ class CreateSeriesTable extends Migration
             $table->longText('synopsis');
             $table->integer('likes')->unsigned();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->integer('number_of_seasons');
+            $table->float('rating');
             $table->timestamps();
             });
 

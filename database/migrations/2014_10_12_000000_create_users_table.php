@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('date_birth');
             $table->string('user_name');
+            $table->integer('followers');
+            $table->integer('following');
             $table->rememberToken();
             $table->timestamps();
         });
