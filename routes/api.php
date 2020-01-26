@@ -37,3 +37,5 @@ Route::get('mostrarComentario/{id}', 'CommentController@showComment');
 Route::post('criarComentario', 'CommentController@createComment');
 Route::put('atualizarComentario/{id}', 'CommentController@updateComment');
 Route::delete('deletarComentario/{id}', 'CommentController@deleteComment');
+Route::put('relacionar/{id}', 'CommentController@addUser');
+Route::put('removerRelacionamento/{id}', 'CommentController@removeUser');

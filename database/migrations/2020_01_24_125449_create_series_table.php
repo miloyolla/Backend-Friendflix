@@ -20,15 +20,9 @@ class CreateSeriesTable extends Migration
             $table->String('genre')->nullable();
             $table->longText('synopsis');
             $table->integer('likes')->unsigned();
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->integer('seasons');
             $table->float('rating')->nullable();
             $table->timestamps();
-            });
-
-            //Foreign key
-            Schema::table('series', function (Blueprint $table) {
-              $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             });
     }
 

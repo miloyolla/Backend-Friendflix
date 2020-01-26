@@ -13,7 +13,6 @@ class CommentController extends Controller
     $comment->text = $request->text;
     $comment->likes = $request->likes;
     $comment->share = $request->share;
-    $comment->user_id = $request->user_id;
     $comment->save();
 
     return response()->json([$comment]);
@@ -45,9 +44,6 @@ class CommentController extends Controller
       if($request->share){
           $comment->share = $request->share;
       }
-      if($request->user_id){
-        $comment->user_id = $request->user_id;
-      }
       $comment->save();
       return response()->json([$comment]);
     }
@@ -60,5 +56,26 @@ class CommentController extends Controller
   public function deleteComment($id){
     Comment::destroy($id);
     return response()->json(['Comentario deletada']);
+  }
+
+  //Método responsavel por estabelecer uma relação entre user e comment
+  public function addUser(Request $request, $id){
+    $comment = Comment::find($id);
+    if($request->user_id){
+      $comment->user_id = $request->user_id;
+    }
+    $comment->save();
+    return response()->json(['Sucesso']);
+  }
+
+  //Método responsavel por remover uma relação entre user e comment
+  public function removeUser(Request $request, $id){
+    $comment = Comment::find($id);
+
+    if($request->user_id){
+      $comment->user_id = null;
+    }
+    $comment->save();
+    return response()->json(['Sucesso']);
   }
 }

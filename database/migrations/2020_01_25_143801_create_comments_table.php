@@ -21,7 +21,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
-            //Foreign key
+        //Foreign key
         Schema::table('comments', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

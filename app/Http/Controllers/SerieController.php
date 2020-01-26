@@ -15,7 +15,6 @@ class SerieController extends Controller
     $serie->genre = $request->genre;
     $serie->synopsis = $request->synopsis;
     $serie->likes = $request->likes;
-    $serie->user_id = $request->user_id;
     $serie->seasons = $request->seasons;
     $serie->rating = $request->rating;
     $serie->save();
@@ -52,9 +51,7 @@ class SerieController extends Controller
       if($request->likes){
         $serie->likes = $request->likes;
       }
-      if($request->user_id){
-        $serie->user_id = $request->user_id;
-      }
+      
       if($request->seasons){
         $serie->seasons = $request->seasons;
       }
