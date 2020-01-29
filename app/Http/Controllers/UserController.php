@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Validator;
 use App\User;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
   //Método responsável por criar novo usuário
-  public function createUser(Request $request){
+  public function createUser(UserRequest $request){
+
     $user = new User;
 
     $user->name = $request->name;
@@ -36,7 +39,7 @@ class UserController extends Controller
   }
 
   //Método para edição de dados do usuario
-  public function updateUser(Request $request, $id){
+  public function updateUser(UserRequest $request, $id){
     $user = User::find($id);
     if($user){
       if($request->name){

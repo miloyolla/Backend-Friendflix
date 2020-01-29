@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        LaravelLegends\PtBrValidator\ValidatorProvider::class,
     ],
 
     /*
@@ -227,5 +228,4 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
 ];
