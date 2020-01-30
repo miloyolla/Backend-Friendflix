@@ -49,3 +49,11 @@ Route::put('relacionarUser/{id}', 'CommentController@addUser');
 Route::put('removerRelacionamentoUser/{id}', 'CommentController@removeUser');
 Route::get('listarCommentsUser/{id}', 'CommentController@listCommentUser');
 Route::get('mostrarUserComment/{id}', 'CommentController@commentUser');
+
+//Passport
+Route::post('registrar', 'API\PassportController@register');
+Route::post('login', 'API\PassportController@login');
+Route::group(['middleware'=> 'auth:api'], function(){
+  Route::post('logout', 'API\PassportController@logout');
+  Route::get('getDetails', 'API\PassportController@getDetails');
+});
