@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use App\Serie;
 use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
@@ -76,4 +77,30 @@ class UserController extends Controller
     User::destroy($id);
     return response()->json(['Usuario deletado']);
   }
+
+
+// like
+
+  //Método responsável por dar um like de um user para uma série
+  public function followSerie($ser, $id){
+    $user = User::find($id);
+    $serie = Serie::find($ser);
+    $user->series()->attach($serie->id);
+    return response()->json(['Serie curtida']);
+  }
+
+  //Método responsável por tirar o like de um user para uma série
+  public function unfollowSerie($ser, $id){
+    $user = User::find($id);
+    $serie = Serie::find($ser);
+    $user->series()->detach($serie->id);
+    return response()->json(['Curtida retirada']);
+  }
+
+  //Método responsável por listar as series curtidas de um user
+    public function following($id){
+      $user = User::find($id);
+      return response()->json($user->series);
+    }
+
 }

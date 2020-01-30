@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use App\User;
+use App\Serie;
+
 class CommentController extends Controller
 {
   //Método responsavel por criar um novo comentario
@@ -58,7 +61,9 @@ class CommentController extends Controller
     return response()->json(['Comentario deletada']);
   }
 
-  //Método responsavel por estabelecer uma relação entre user e comment
+//USER
+
+  //Método responsavel por estabelecer uma relação entre user e comentario
   public function addUser(Request $request, $id){
     $comment = Comment::find($id);
     if($request->user_id){
@@ -68,14 +73,22 @@ class CommentController extends Controller
     return response()->json(['Sucesso']);
   }
 
-  //Método responsavel por remover uma relação entre user e comment
-  public function removeUser(Request $request, $id){
+  //Método responsavel por remover uma relação entre user e comentario
+  public function removeUser($id){
     $comment = Comment::find($id);
-
-    if($request->user_id){
-      $comment->user_id = null;
-    }
+    $comment->user_id = null;
     $comment->save();
     return response()->json(['Sucesso']);
+  }
+
+  //Método responsável por retrnar a qual user o comentário pertence
+  public function commentUser($id){
+    $comment = Comment::find($id);
+    return response()->json($comment->user_id);
+  }
+  //Método responsável por listar os comentários do user
+  public function listCommentUser($user_id){
+    $user = User::find($user_id);
+    return response()->json($user->comments);
   }
 }

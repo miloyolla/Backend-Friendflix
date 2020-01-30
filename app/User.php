@@ -39,8 +39,12 @@ class User extends Authenticatable
     ];
 
     //relacionamento: comentario N - 1 usuario
-    public function comment(){
+    public function comments(){
       return $this->hasMany('App\Comment');
+    }
+
+    public function series(){
+      return $this->belongsToMany('App\Serie');
     }
 
 }

@@ -51,7 +51,7 @@ class SerieController extends Controller
       if($request->likes){
         $serie->likes = $request->likes;
       }
-      
+
       if($request->seasons){
         $serie->seasons = $request->seasons;
       }
@@ -71,4 +71,11 @@ class SerieController extends Controller
     Serie::destroy($id);
     return response()->json(['Série deletada']);
   }
+
+  //Método responsável por listar os user que curtem uma serie
+  public function followers($id){
+    $serie = Serie::find($id);
+    return response()->json($serie->users);
+  }
+
 }

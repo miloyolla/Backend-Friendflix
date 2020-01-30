@@ -24,6 +24,11 @@ Route::post('criarUser', 'UserController@createUser');
 Route::put('atualizarUser/{id}', 'UserController@updateUser');
 Route::delete('deletarUser/{id}', 'UserController@deleteUser');
 
+Route::put('followSerie/{id}/{serie}', 'UserController@followSerie');
+Route::put('unfollowSerie/{id}/{serie}', 'UserController@unfollowSerie');
+Route::get('listFollowing/{id}', 'UserController@following');
+
+
 //Rotas usadas para Serie
 Route::get('listarSeries', 'SerieController@listSerie');
 Route::get('mostrarSerie/{id}', 'SerieController@showSerie');
@@ -31,11 +36,16 @@ Route::post('criarSerie', 'SerieController@createSerie');
 Route::put('atualizarSerie/{id}', 'SerieController@updateSerie');
 Route::delete('deletarSerie/{id}', 'SerieController@deleteSerie');
 
+Route::get('listFollowers/{id}', 'SerieController@followers');
+
 //Rotas usadas para Comentario
 Route::get('listarComentarios', 'CommentController@listComment');
 Route::get('mostrarComentario/{id}', 'CommentController@showComment');
 Route::post('criarComentario', 'CommentController@createComment');
 Route::put('atualizarComentario/{id}', 'CommentController@updateComment');
 Route::delete('deletarComentario/{id}', 'CommentController@deleteComment');
-Route::put('relacionar/{id}', 'CommentController@addUser');
-Route::put('removerRelacionamento/{id}', 'CommentController@removeUser');
+
+Route::put('relacionarUser/{id}', 'CommentController@addUser');
+Route::put('removerRelacionamentoUser/{id}', 'CommentController@removeUser');
+Route::get('listarCommentsUser/{id}', 'CommentController@listCommentUser');
+Route::get('mostrarUserComment/{id}', 'CommentController@commentUser');

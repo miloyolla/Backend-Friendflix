@@ -19,12 +19,17 @@ class CreateCommentsTable extends Migration
             $table->integer('likes')->unsigned();
             $table->integer('share')->unsigned();
             $table->unsignedBigInteger('user_id')->nullable();
+            //$table->unsignedBigInteger('serie_id')->nullable();
             $table->timestamps();
         });
         //Foreign key
         Schema::table('comments', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
+
+        // Schema::table('comments', function (Blueprint $table) {
+        //     $table->foreign('serie_id')->references('id')->on('series')->onDelete('cascade');
+        // });
     }
 
     /**
