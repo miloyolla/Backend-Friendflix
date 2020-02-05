@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\Serie;
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\Users as UserResource;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -19,24 +21,40 @@ class UserController extends Controller
     $user->email = $request->email;
     $user->password = $request->password;
     $user->date_birth = $request->date_birth;
+    $user->photo = $request->photo;
     $user->user_name = $request->user_name;
     $user->followers = $request->followers;
     $user->following = $request->following;
     $user->save();
 
+    If (!Storage::exists('localUserPhotos/'))
+			Storage::makeDirectory('localUserPhotos/',0775,true);
+
+    $file = $request->file('photo');
+
+    $filename = $user->id.'.'.$file->getClientOriginalExtension();
+    $path = $file->storeAs('localUserPhotos', $filename);
+    $user->photo = $path;
+
+    $user->save();
     return response()->json([$user]);
   }
 
   //Método que retorna lista com todos os usuarios
   public function listUser(){
-    $user = User::all();
-    return response()->json($user);
+
+    $paginator = User::paginate(10);
+    $user = UserResource::collection($paginator);
+    $last = $paginator->lastPage();
+    return response()->json([$user, $last]);
+    //return response()->json(UserResource::collection($user));
   }
 
   //Método responsavel por exibir o usuario com o id informado
   public function showUser($id){
     $user = User::findOrFail($id); //findOrFail faz tratamento de erro
-    return response()->json([$user]);  //json formato de resposta
+    //return response()->json([$user]);  //json formato de resposta
+    return response()->json(new UserResource($user));
   }
 
   //Método para edição de dados do usuario
@@ -45,6 +63,9 @@ class UserController extends Controller
     if($user){
       if($request->name){
         $user->name = $request->name;
+      }
+      if($request->photo){
+        $user->photo = $request->photo;
       }
       if($request->email){
         $user->email = $request->email;
@@ -74,6 +95,9 @@ class UserController extends Controller
 
   //Método usado para deletar um usuario
   public function deleteUser($id){
+    $user = User::findOrFail($id);
+
+    Storage::delete($user->photo);
     User::destroy($id);
     return response()->json(['Usuario deletado']);
   }
@@ -102,5 +126,13 @@ class UserController extends Controller
       $user = User::find($id);
       return response()->json($user->series);
     }
+
+    //Método responsável por exibir a foto do user
+    public function exibir($id){
+      $user = User::findOrFail($id);
+      $path = $user->photo;
+      return Storage::download($path);
+    }
+
 
 }

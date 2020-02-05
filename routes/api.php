@@ -28,6 +28,8 @@ Route::put('followSerie/{id}/{serie}', 'UserController@followSerie');
 Route::put('unfollowSerie/{id}/{serie}', 'UserController@unfollowSerie');
 Route::get('listFollowing/{id}', 'UserController@following');
 
+Route::get('exibir/{id}', 'UserController@exibir');
+
 
 //Rotas usadas para Serie
 Route::get('listarSeries', 'SerieController@listSerie');

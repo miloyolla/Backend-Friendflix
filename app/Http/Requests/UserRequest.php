@@ -32,6 +32,7 @@ class UserRequest extends FormRequest
           'email' => 'required|email|unique:users,email',
           'password' => 'required|integer',
           'date_birth' => 'string|Data',
+          'photo'=> 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
           'user_name' => 'required|string|unique:users,user_name'
         ];
       }
