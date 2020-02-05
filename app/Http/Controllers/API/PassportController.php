@@ -23,6 +23,7 @@ class PassportController extends Controller
     $newUser->user_name = $request->user_name;
     $newUser->followers = $request->followers;
     $newUser->following = $request->following;
+    $newUser->is_admin = $request->is_admin;
     $newUser->save();
 
     $success['token'] = $newUser->createToken('MyApp')->accessToken;
@@ -52,4 +53,5 @@ class PassportController extends Controller
     $accessToken->revoke();
     return response()->json(null,204);
   }
+
 }

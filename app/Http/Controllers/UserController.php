@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\Serie;
 use App\Http\Requests\UserRequest;
+//use App\Http\Requests;
 use App\Http\Resources\Users as UserResource;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,6 +26,7 @@ class UserController extends Controller
     $user->user_name = $request->user_name;
     $user->followers = $request->followers;
     $user->following = $request->following;
+    $user->is_admin = $request->is_admin;
     $user->save();
 
     If (!Storage::exists('localUserPhotos/'))

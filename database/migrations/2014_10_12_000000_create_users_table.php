@@ -18,13 +18,14 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('photo');
+            //$table->string('photo');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('date_birth');
             $table->string('user_name')->unique();
             $table->integer('followers');
             $table->integer('following');
+            $table->boolean('is_admin')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

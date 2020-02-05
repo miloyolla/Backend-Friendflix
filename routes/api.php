@@ -57,5 +57,5 @@ Route::post('registrar', 'API\PassportController@register');
 Route::post('login', 'API\PassportController@login');
 Route::group(['middleware'=> 'auth:api'], function(){
   Route::post('logout', 'API\PassportController@logout');
-  Route::get('getDetails', 'API\PassportController@getDetails');
+  Route::post('getDetails', 'API\PassportController@getDetails')->middleware('perguntar');
 });
